@@ -1,9 +1,15 @@
-import urllib2
+import urllib2, os
 from bs4 import BeautifulSoup
 
 def main():
-    fileName = "weight.csv"
-    file = open(fileName, "w")
+    print "Calculating JSON weight object..."
+
+    path = "data"
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    fileName = "weight.json"
+    file = open(os.path.join(path, fileName), "w")
     scrapeWeight(file)
     file.close()
 
@@ -12,14 +18,15 @@ def scrapeWeight(file):
     pokemonPage = urllib2.urlopen(pokemonPageName)
     pokemonSoup = BeautifulSoup(pokemonPage)
     pokemonCell = pokemonSoup.findAll(name = "a")
-    
+
+    objStr = "{"
     for i in range(42, 193):
         pokemon = pokemonCell[i].contents[1]
         weightPageName = "http://pokedream.com/pokedex/pokemon/" + pokemon
         weightPage = urllib2.urlopen(weightPageName)
         weightSoup = BeautifulSoup(weightPage)
         weightCell = weightSoup.findAll(name = "td")
-        
+
         weight = weightCell[9].contents[0]
         if "kg" in weight:
             weight = weightCell[8].contents[0]
@@ -56,7 +63,11 @@ def scrapeWeight(file):
         if "Mew" in pokemon:
             weight = weightCell[7].contents[0]
 
-        row = pokemon + ", " + weight + "\n"
-        file.write(row)
+        row = '"' + pokemon + '":"' + weight + '",'
+        objStr += row
+
+    objStr = objStr[:len(objStr) - 1] + "}"
+    file.write(objStr)
+    print "\tDone!"
 
 main()

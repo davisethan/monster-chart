@@ -4,6 +4,8 @@ var heightCanvas = $("#heightCanvas")[0];
 var heightContext = heightCanvas.getContext("2d");
 var weightCanvas = $("#weightCanvas")[0];
 var weightContext = weightCanvas.getContext("2d");
+var powerCanvas = $("#powerCanvas")[0];
+var powerContext = powerCanvas.getContext("2d");
 
 pokedexContext.rect(0, 0, pokedexCanvas.width, pokedexCanvas.height);
 pokedexContext.fillStyle = "white";
@@ -14,10 +16,14 @@ heightContext.fill();
 weightContext.rect(0, 0, weightCanvas.width, weightCanvas.height);
 weightContext.fillStyle = "white";
 weightContext.fill();
+powerContext.rect(0, 0, powerCanvas.width, powerCanvas.height);
+powerContext.fillStyle = "white";
+powerContext.fill();
 
 var pokedexArray = [];
 var heightArray = [];
 var weightArray = [];
+var powerArray = [];
 var Monster = function(x, y, length, name) {
     this.left = x;
     this.top = y;
@@ -49,10 +55,18 @@ for (var monster in weightList) {
     oldHeight += newHeight;
 }
 
+oldHeight = 0;
+var powerList = orderPokemonByPower();
+for (var monster in powerList) {
+    var newHeight = pokemonHeight(powerList[monster]);
+    drawImage(oldHeight, heightCanvas.height - newHeight, newHeight, newHeight, pokemon.image[powerList[monster]], powerContext, powerList[monster], powerArray);
+    oldHeight += newHeight;
+}
+
 $("#pokedexCanvas").click(function(event) {
     var clickedX = event.pageX - this.offsetLeft;
     var clickedY = event.pageY - this.offsetTop;
-                          
+
     for (var i = 0; i < pokedexArray.length; i++) {
         if (clickedX < pokedexArray[i].right && clickedX > pokedexArray[i].left &&
             clickedY > pokedexArray[i].top && clickedY < pokedexArray[i].bottom) {
@@ -64,7 +78,7 @@ $("#pokedexCanvas").click(function(event) {
 $("#heightCanvas").click(function(event) {
     var clickedX = event.pageX - this.offsetLeft;
     var clickedY = event.pageY - this.offsetTop;
-                         
+
     for (var i = 0; i < heightArray.length; i++) {
         if (clickedX < heightArray[i].right && clickedX > heightArray[i].left &&
             clickedY > heightArray[i].top && clickedY < heightArray[i].bottom) {
@@ -76,7 +90,7 @@ $("#heightCanvas").click(function(event) {
 $("#weightCanvas").click(function(event) {
     var clickedX = event.pageX - this.offsetLeft;
     var clickedY = event.pageY - this.offsetTop;
-                         
+
     for (var i = 0; i < weightArray.length; i++) {
         if (clickedX < weightArray[i].right && clickedX > weightArray[i].left &&
             clickedY > weightArray[i].top && clickedY < weightArray[i].bottom) {
@@ -85,11 +99,24 @@ $("#weightCanvas").click(function(event) {
     }
 });
 
+$("#powerCanvas").click(function(event) {
+    var clickedX = event.pageX - this.offsetLeft;
+    var clickedY = event.pageY - this.offsetTop;
+
+    for (var i = 0; i < powerArray.length; i++) {
+        if (clickedX < powerArray[i].right && clickedX > powerArray[i].left &&
+            clickedY > powerArray[i].top && clickedY < powerArray[i].bottom) {
+            alertBox(powerArray[i].name);
+        }
+    }
+});
+
 function alertBox(monster) {
     $("#dialog").dialog();
     $("#dialog").dialog("option", "title", monster);
     $("#dialog").html("Height: "  + pokemon.height[monster] + "<br/>" +
-                      "Weight: " + pokemon.weight[monster]);
+                      "Weight: " + pokemon.weight[monster] + "<br/>" +
+                      "Power: " + pokemon.power[monster]);
 }
 
 function drawImage(x, y, width, height, source, context, monster, monsterArray) {
@@ -106,7 +133,7 @@ function orderPokemonByHeight() {
     for (var monster in pokemon.height) {
         insertionSort(monster, 0, list.length - 1, list, pokemonHeight);
     }
-    
+
     return list;
 }
 
@@ -115,7 +142,16 @@ function orderPokemonByWeight() {
     for (var monster in pokemon.weight) {
         insertionSort(monster, 0, list.length - 1, list, pokemonWeight);
     }
-    
+
+    return list;
+}
+
+function orderPokemonByPower() {
+    var list = [];
+    for (var monster in pokemon.power) {
+        insertionSort(monster, 0, list.length - 1, list, pokemonPower);
+    }
+
     return list;
 }
 
@@ -133,12 +169,16 @@ function pokemonWeight(monster) {
     return newWeight;
 }
 
+function pokemonPower(monster) {
+    return pokemon.power[monster];
+}
+
 function insertionSort(item, min, max, list, action) {
     if (max < min) {
         list.splice(max + 1, 0, item);
         return list;
     }
-    
+
     var center = Math.floor((max + min) / 2);
     if (action(item) > action(list[center])) {
         return insertionSort(item, center + 1, max, list, action);
