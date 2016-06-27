@@ -12,9 +12,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', function(req, res) {
   db.pokemon.findOne({}, function(err, docs) {
-    var pokemon = docs
     res.render('index', {
-      pokemon: JSON.stringify(pokemon)
+      pokemon: JSON.stringify(docs)
     })
   })
 })
