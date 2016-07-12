@@ -3,7 +3,7 @@ var mongojs = require('mongojs')
 var path = require('path')
 
 var app = express()
-var db = mongojs('mongodb://127.0.0.1:27017/stats', ['pokemon'])
+var db = mongojs('mongodb://mongodb:27017/stats', ['pokemon'])
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
