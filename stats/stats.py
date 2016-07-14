@@ -23,7 +23,7 @@ def main():
 
 	scrapeImages(pokemon, names)
 
-	fileName = 'stats.json'
+	fileName = 'stats/stats.json'
 	file = open(fileName, 'w')
 	json.dump(pokemon, file, indent = 2)
 	file.close()

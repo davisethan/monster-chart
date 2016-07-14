@@ -4,9 +4,8 @@ View generation I pokemon stats
 ***
 
 ### Installation requirements
-- Node.js
-- NPM
-- MongoDB
+- Docker
+- Docker Compose
 
 ***
 
@@ -17,22 +16,13 @@ View generation I pokemon stats
 - `$ git clone git@github.com:ecdavis15/PokemonChart.git`
 - `$ cd PokemonChart`
 
-*Install NPM dependencies*
+*Start docker and boot docker containers*
 
-- `$ npm install`
+- `eval $(docker-machine env default)`
+- `docker-compose up`
 
-*Generate pokemon stats*
+*Find docker-machine IP address (example: 10.211.55.4)*
 
-- `$ python stats.py`
+- `docker-machine ip default`
 
-*Create, boot, and fill MongoDB database*
-
-- `$ mkdir pokemondb`
-- `$ mongod --dbpath pokemondb`
-- `$ mongoimport --db stats --collection pokemon --file stats.json`
-
-*Boot Node.js server*
-
-- `$ npm start`
-
-*Visit [http://localhost:3000](http://localhost:3000) to view generation I pokemon stats*
+*Visit [http://10.211.55.4:3000](http://10.211.55.4:3000) to view generation I pokemon stats*
