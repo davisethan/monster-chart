@@ -54,7 +54,7 @@ def scrapePowers(pokemon, names):
 	page = urllib2.urlopen(pageName)
 	soup = BeautifulSoup(page)
 	cell = soup.findAll(name = 'td')
-	
+
 	for i in range(0, 166):
 		power = cell[3 + 10 * i].contents[0].encode('utf-8')
 		if names[i] not in pokemon['powers'] or power < pokemon['powers'][names[i]]:

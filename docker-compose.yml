@@ -1,16 +1,8 @@
-app:
-  build: .
+webapp:
+  image: node:latest
+  working_dir: /opt/webapp
+  command: node ./index.js
+  volumes:
+    - ./:/opt/webapp
   ports:
-    - 3000:3000
-  links:
-    - mongodb
-
-mongodb:
-  image: mongo:3.2.4
-  ports:
-    - 27017:27017
-
-stats:
-  build: ./stats
-  links:
-    - mongodb
+    - 8080:8080

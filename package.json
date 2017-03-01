@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "View generation I pokemon stats",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ecdavis15/PokemonChart.git"
@@ -17,8 +14,7 @@
   },
   "homepage": "https://github.com/ecdavis15/PokemonChart#readme",
   "dependencies": {
-    "express": "^4.13.4",
-    "mongojs": "^2.4.0",
-    "pug": "^2.0.0-beta3"
+    "express": "^4.14.1",
+    "pug": "^2.0.0-beta9"
   }
 }
