@@ -1,5 +1,7 @@
-FROM node:4.4.0
-COPY . /app
-WORKDIR /app
+FROM node:latest
+
+COPY ./ /opt/webapp
+WORKDIR /opt/webapp
+
 RUN npm install
-CMD npm start
+CMD node ./index.js
