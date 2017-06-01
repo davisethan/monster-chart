@@ -16,5 +16,8 @@
   "dependencies": {
     "express": "^4.14.1",
     "pug": "^2.0.0-beta9"
+  },
+  "engines": {
+    "node": "6.10.3"
   }
 }
