@@ -1,9 +1,0 @@
-webapp:
-  # build: ./
-  image: node:latest
-  working_dir: /opt/webapp
-  command: node ./index.js
-  volumes:
-    - ./:/opt/webapp
-  ports:
-    - 8080:8080

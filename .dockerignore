@@ -1,0 +1,5 @@
+# Dependency files and folders
+node_modules
+.git
+.gitignore
+README.md
