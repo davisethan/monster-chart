@@ -3,6 +3,7 @@ var path = require('path')
 var pokemon = require('./stats/stats')
 
 var app = express()
+var port = process.env.PORT || 8080
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
@@ -15,4 +16,6 @@ app.get('/', function(req, res) {
   })
 })
 
-app.listen(process.env.PORT || 8080)
+app.listen(port, function() {
+  console.log('Web server live...')
+})
