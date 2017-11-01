@@ -1,6 +1,6 @@
 FROM node:latest
 COPY ./ /opt/webapp
 WORKDIR /opt/webapp
-RUN npm install
-EXPOSE 80
+RUN yarn install
+EXPOSE 8080
 CMD node ./index.js
