@@ -7,13 +7,17 @@ html
 		script(src='https://code.jquery.com/ui/1.11.4/jquery-ui.js')
 	body
 		h1 Pokemon Height, Ordered by Pokedex
-		canvas(id='pokedexCanvas', height='600', width='11825')
+		div(class='canvas-container')
+			canvas(id='pokedexCanvas', height='600', width='11825')
 		h1 Pokemon Height, Ordered by Height
-		canvas(id='heightCanvas', height='600', width='11825')
+		div(class='canvas-container')
+			canvas(id='heightCanvas', height='600', width='11825')
 		h1 Pokemon Height, Ordered by Weight
-		canvas(id='weightCanvas', height='600', width='11825')
+		div(class='canvas-container')
+			canvas(id='weightCanvas', height='600', width='11825')
 		h1 Pokemon Height, Ordered by Base Stat Power Ranking
-		canvas(id='powerCanvas', height='600', width='11825')
+		div(class='canvas-container')
+			canvas(id='powerCanvas', height='600', width='11825')
 		div#dialog
 		h3 
 			| All data pulled from 
