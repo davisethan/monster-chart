@@ -1,6 +1,7 @@
 html
 	head
 		title Pokemon Chart
+		link(rel='shortcut icon', href='/images/favicon.ico')
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(rel='stylesheet', href='https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css')
 		script(src='https://code.jquery.com/jquery-1.11.2.js')
@@ -20,7 +21,7 @@ html
 			canvas(id='powerCanvas', height='600', width='11825')
 		div#dialog
 		h3 
-			| All data pulled from 
+			| All stats pulled from 
 			a(href='http://pokemondb.net/pokedex/all') pokemondb.net/pokedex/all
 		script var pokemon = !{pokemon}
 		script(src='/javascripts/app.js')
