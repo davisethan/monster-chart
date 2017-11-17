@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:carbon-alpine
 COPY ./ /opt/webapp
 WORKDIR /opt/webapp
 RUN yarn install
